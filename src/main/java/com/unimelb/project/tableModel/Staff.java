@@ -25,9 +25,13 @@ public class Staff implements Serializable {
 	private String email;
 	private String orcid;
 	
+	// Staff Constructor
+	public Staff() {
+		
+	}
+		
 	// Staff Constructor just with staff name 
 	public Staff(String firstName, String middleName, String lastName) {
-		super();
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
@@ -254,6 +258,13 @@ public class Staff implements Serializable {
 	 */
 	public int getStaffId() {
 		return staffId;
+	}
+
+	/**
+	 * @param staffId the staffId to set
+	 */
+	public void setStaffId(int staffId) {
+		this.staffId = staffId;
 	}
 
 }

@@ -16,9 +16,19 @@ public class Department implements Serializable {
 	
 	// Department Constructor with department info
 	public Department(String departmentName, String departmentInfo) {
-		super();
 		this.departmentName = departmentName;
 		this.departmentInfo = departmentInfo;
+	}
+
+	public Department() {
+		
+	}
+
+	/**
+	 * @param departmentid the departmentid to set
+	 */
+	public void setDepartmentid(int departmentid) {
+		this.departmentid = departmentid;
 	}
 
 	/**

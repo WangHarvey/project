@@ -9,17 +9,21 @@ public class ApiReturn implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	// Api return information table attributes
 	private int retrunInfoId;
 	private String returnInfo;
 	private String source;
 	private int staff;
 	private Date requestTime;
-	
+
+	// API return info Constructor
+	public ApiReturn() {
+
+	}
+
 	// API return info Constructor
 	public ApiReturn(String returnInfo, String source, int staff, Date requestTime) {
-		super();
 		this.returnInfo = returnInfo;
 		this.source = source;
 		this.staff = staff;
@@ -34,7 +38,8 @@ public class ApiReturn implements Serializable {
 	}
 
 	/**
-	 * @param source the source to set
+	 * @param source
+	 *            the source to set
 	 */
 	public void setSource(String source) {
 		this.source = source;
@@ -48,7 +53,8 @@ public class ApiReturn implements Serializable {
 	}
 
 	/**
-	 * @param staff the staff to set
+	 * @param staff
+	 *            the staff to set
 	 */
 	public void setStaff(int staff) {
 		this.staff = staff;
@@ -62,10 +68,27 @@ public class ApiReturn implements Serializable {
 	}
 
 	/**
-	 * @param requestTime the requestTime to set
+	 * @param requestTime
+	 *            the requestTime to set
 	 */
 	public void setRequestTime(Date requestTime) {
 		this.requestTime = requestTime;
+	}
+
+	/**
+	 * @param retrunInfoId
+	 *            the retrunInfoId to set
+	 */
+	public void setRetrunInfoId(int retrunInfoId) {
+		this.retrunInfoId = retrunInfoId;
+	}
+
+	/**
+	 * @param returnInfo
+	 *            the returnInfo to set
+	 */
+	public void setReturnInfo(String returnInfo) {
+		this.returnInfo = returnInfo;
 	}
 
 	/**
@@ -81,5 +104,5 @@ public class ApiReturn implements Serializable {
 	public String getReturnInfo() {
 		return returnInfo;
 	}
-	
+
 }

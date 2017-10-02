@@ -17,7 +17,6 @@ public class StaffRelationshipStaff implements Serializable {
 	
 	// Staff and Staff relationship Constructor
 	public StaffRelationshipStaff(int staff1, int paper, int staff2) {
-		super();
 		this.staff1 = staff1;
 		this.paper = paper;
 		this.staff2 = staff2;

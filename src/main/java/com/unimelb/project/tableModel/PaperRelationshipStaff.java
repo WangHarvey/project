@@ -16,9 +16,12 @@ public class PaperRelationshipStaff implements Serializable {
 	
 	// Paper and Staff relationship Constructor
 	public PaperRelationshipStaff(int paper, int staff) {
-		super();
 		this.paper = paper;
 		this.staff = staff;
+	}
+
+	public PaperRelationshipStaff() {
+
 	}
 
 	/**
@@ -54,6 +57,13 @@ public class PaperRelationshipStaff implements Serializable {
 	 */
 	public int getPaperRelationshipStaffId() {
 		return paperRelationshipStaffId;
+	}
+
+	/**
+	 * @param paperRelationshipStaffId the paperRelationshipStaffId to set
+	 */
+	public void setPaperRelationshipStaffId(int paperRelationshipStaffId) {
+		this.paperRelationshipStaffId = paperRelationshipStaffId;
 	}
 	
 

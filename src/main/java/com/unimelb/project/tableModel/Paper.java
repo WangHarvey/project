@@ -9,7 +9,7 @@ public class Paper implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	// Paper info table attributes
 	private int paperId;
 	private String title;
@@ -17,15 +17,18 @@ public class Paper implements Serializable {
 	private String field;
 	private String author;
 	private String source;
-	
+
 	// Paper Constructor with paper info
 	public Paper(String title, Date publishedTime, String field, String author, String source) {
-		super();
 		this.title = title;
 		this.publishedTime = publishedTime;
 		this.field = field;
 		this.author = author;
 		this.source = source;
+	}
+
+	public Paper() {
+
 	}
 
 	/**
@@ -36,7 +39,8 @@ public class Paper implements Serializable {
 	}
 
 	/**
-	 * @param title the title to set
+	 * @param title
+	 *            the title to set
 	 */
 	public void setTitle(String title) {
 		this.title = title;
@@ -50,7 +54,8 @@ public class Paper implements Serializable {
 	}
 
 	/**
-	 * @param publishedTime the publishedTime to set
+	 * @param publishedTime
+	 *            the publishedTime to set
 	 */
 	public void setPublishedTime(Date publishedTime) {
 		this.publishedTime = publishedTime;
@@ -64,7 +69,8 @@ public class Paper implements Serializable {
 	}
 
 	/**
-	 * @param field the field to set
+	 * @param field
+	 *            the field to set
 	 */
 	public void setField(String field) {
 		this.field = field;
@@ -78,7 +84,8 @@ public class Paper implements Serializable {
 	}
 
 	/**
-	 * @param author the author to set
+	 * @param author
+	 *            the author to set
 	 */
 	public void setAuthor(String author) {
 		this.author = author;
@@ -92,7 +99,8 @@ public class Paper implements Serializable {
 	}
 
 	/**
-	 * @param source the source to set
+	 * @param source
+	 *            the source to set
 	 */
 	public void setSource(String source) {
 		this.source = source;
@@ -104,6 +112,12 @@ public class Paper implements Serializable {
 	public int getPaperId() {
 		return paperId;
 	}
-	
 
+	/**
+	 * @param paperId
+	 *            the paperId to set
+	 */
+	public void setPaperId(int paperId) {
+		this.paperId = paperId;
+	}
 }
