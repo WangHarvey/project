@@ -13,9 +13,9 @@ public class StaffRelationshipAuthor implements Serializable {
 	private int staffRelationshipauthorId;
 	private int staff;
 	private int paper;
-	private int author;
+	private String author;
 	
-	public StaffRelationshipAuthor(int staff, int paper, int author) {
+	public StaffRelationshipAuthor(int staff, int paper, String author) {
 		this.staff = staff;
 		this.paper = paper;
 		this.author = author;
@@ -59,14 +59,14 @@ public class StaffRelationshipAuthor implements Serializable {
 	/**
 	 * @return the author
 	 */
-	public int getAuthor() {
+	public String getAuthor() {
 		return author;
 	}
 
 	/**
 	 * @param author the author to set
 	 */
-	public void setAuthor(int author) {
+	public void setAuthor(String author) {
 		this.author = author;
 	}
 	

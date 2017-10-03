@@ -103,4 +103,31 @@ public class IPaperRelationshipStaffDAOImpl implements IPaperRelationshipStaffDA
 		return all;
 	}
 
+	public boolean check(int paper, int staff) throws Exception {
+		// TODO Auto-generated method stub
+		boolean flag = false;
+		PreparedStatement pstmt = null;
+		String sql = "SELECT * FROM paperrelationshipstaff WHERE paper=? AND staff=? ";
+		try {
+			pstmt = this.conn.prepareStatement(sql);
+			pstmt.setInt(1, paper);
+			pstmt.setInt(2, staff);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				flag = true;
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception e1) {
+
+				}
+			}
+		}
+		return flag;
+	}
+
 }

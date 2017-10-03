@@ -10,5 +10,7 @@ public interface IPaperRelationshipStaffDAO {
 	public boolean doDelete(int id) throws Exception;
 
 	public List<PaperRelationshipStaff> findByPaper(int paper) throws Exception;
+	
+	public boolean check(int paper,int staff) throws Exception;
 
 }

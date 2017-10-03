@@ -20,12 +20,12 @@ public class IPaperDAOImpl implements IPaperDAO {
 		// TODO Auto-generated method stub
 		boolean flag = false;
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO paper(title,publishedtime,field,author,source) VALUES (?,?,?,?,?) ";
+		String sql = "INSERT INTO paper(title,publishedtime,type,author,source) VALUES (?,?,?,?,?) ";
 		try {
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, paper.getTitle());
 			pstmt.setDate(2, new java.sql.Date(paper.getPublishedTime().getTime()));
-			pstmt.setString(3, paper.getField());
+			pstmt.setString(3, paper.getType());
 			pstmt.setString(4, paper.getAuthor());
 			pstmt.setString(5, paper.getSource());
 
@@ -51,13 +51,13 @@ public class IPaperDAOImpl implements IPaperDAO {
 		// TODO Auto-generated method stub
 		boolean flag = false;
 		PreparedStatement pstmt = null;
-		String sql = "UPDATE paper SET title=?,publishedtime=?,field=?,author=?,source=? WHERE id=?";
+		String sql = "UPDATE paper SET title=?,publishedtime=?,type=?,author=?,source=? WHERE id=?";
 
 		try {
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, paper.getTitle());
 			pstmt.setDate(2, new java.sql.Date(paper.getPublishedTime().getTime()));
-			pstmt.setString(3, paper.getField());
+			pstmt.setString(3, paper.getType());
 			pstmt.setString(4, paper.getAuthor());
 			pstmt.setString(5, paper.getSource());
 			pstmt.setInt(5, paper.getPaperId());
@@ -118,7 +118,7 @@ public class IPaperDAOImpl implements IPaperDAO {
 				paper.setPaperId(rs.getInt(1));
 				paper.setTitle(rs.getString(2));
 				paper.setPublishedTime(rs.getDate(3));
-				paper.setField(rs.getString(4));
+				paper.setType(rs.getString(4));
 				paper.setAuthor(rs.getString(5));
 				paper.setSource(rs.getString(6));
 			}
@@ -150,7 +150,7 @@ public class IPaperDAOImpl implements IPaperDAO {
 				paper.setPaperId(rs.getInt(1));
 				paper.setTitle(rs.getString(2));
 				paper.setPublishedTime(rs.getDate(3));
-				paper.setField(rs.getString(4));
+				paper.setType(rs.getString(4));
 				paper.setAuthor(rs.getString(5));
 				paper.setSource(rs.getString(6));
 			}
@@ -182,7 +182,7 @@ public class IPaperDAOImpl implements IPaperDAO {
 				paper.setPaperId(rs.getInt(1));
 				paper.setTitle(rs.getString(2));
 				paper.setPublishedTime(rs.getDate(3));
-				paper.setField(rs.getString(4));
+				paper.setType(rs.getString(4));
 				paper.setAuthor(rs.getString(5));
 				paper.setSource(rs.getString(6));
 
@@ -201,6 +201,38 @@ public class IPaperDAOImpl implements IPaperDAO {
 			}
 		}
 		return all;
+	}
+
+	public Paper findLast() throws Exception {
+		// TODO Auto-generated method stub
+		Paper paper = new Paper();
+		PreparedStatement pstmt = null;
+		String sql = "SELECT * FROM paper order by id DESC limit 1";
+		
+		try {
+			pstmt = this.conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				paper.setPaperId(rs.getInt(1));
+				paper.setTitle(rs.getString(2));
+				paper.setPublishedTime(rs.getDate(3));
+				paper.setType(rs.getString(4));
+				paper.setAuthor(rs.getString(5));
+				paper.setSource(rs.getString(6));
+			}
+			rs.close();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception e1) {
+
+				}
+			}
+		}
+		return paper;
 	}
 
 }

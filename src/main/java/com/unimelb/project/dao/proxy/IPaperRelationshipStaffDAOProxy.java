@@ -55,4 +55,17 @@ public class IPaperRelationshipStaffDAOProxy implements IPaperRelationshipStaffD
 		return all;
 	}
 
+	public boolean check(int paper, int staff) throws Exception {
+		// TODO Auto-generated method stub
+		boolean flag = true;
+		try {
+			flag = this.dao.check(paper,staff);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+		return flag;
+	}
+
 }

@@ -16,5 +16,7 @@ public interface IPaperDAO {
 	public Paper findById(int id) throws Exception;
 	
 	public List<Paper> findAll() throws Exception;
+	
+	public Paper findLast() throws Exception;
 
 }

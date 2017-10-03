@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.unimelb.project.api.EuropePMC;
+import com.unimelb.project.api.Scopus;
 import com.unimelb.project.factory.DAOFactory;
 import com.unimelb.project.tableModel.ApiReturn;
 import com.unimelb.project.tableModel.Staff;
@@ -16,7 +17,9 @@ public class APIRequest {
 		List<String> apiList = new ArrayList<String>();
 		// Europe PubMed Central API
 		String apiName1 = "Europe PMC";
+		String apiName2 = "Scopus";
 		apiList.add(apiName1);
+		apiList.add(apiName2);
 		// Other API info
 		
 		try {
@@ -34,9 +37,10 @@ public class APIRequest {
 							// request info from Europe PMC
 							apiReturn = EuropePMC.getApiReturnInfo(staffId, orcid);
 							DAOFactory.getIApiReturnDAOInstance().doCreate(apiReturn);
-						}else if(apiName.equals("Other API")){
-							// request info from Other API
-							
+						}else if(apiName.equals("Scopus")){
+							// request info from Scopuss
+							apiReturn = Scopus.getApiReturnInfo(staffId, orcid);
+							DAOFactory.getIApiReturnDAOInstance().doCreate(apiReturn);
 						}
 					}
 				}

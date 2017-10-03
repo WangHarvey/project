@@ -41,4 +41,17 @@ public class IStaffRelationshipAuthorDAOProxy implements IStaffRelationshipAutho
 		return flag;
 	}
 
+	public boolean check(int paper, int staff,String author) throws Exception {
+		// TODO Auto-generated method stub
+		boolean flag = true;
+		try {
+			flag = this.dao.check(paper,staff,author);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+		return flag;
+	}
+
 }

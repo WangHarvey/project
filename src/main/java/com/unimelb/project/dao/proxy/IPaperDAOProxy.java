@@ -94,4 +94,17 @@ public class IPaperDAOProxy implements IPaperDAO {
 		return paperList;
 	}
 
+	public Paper findLast() throws Exception {
+		// TODO Auto-generated method stub
+		Paper paper = null;
+		try {
+			paper = this.dao.findLast();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+		return paper;
+	}
+
 }

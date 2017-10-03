@@ -14,15 +14,15 @@ public class Paper implements Serializable {
 	private int paperId;
 	private String title;
 	private Date publishedTime;
-	private String field;
+	private String type;
 	private String author;
 	private String source;
 
 	// Paper Constructor with paper info
-	public Paper(String title, Date publishedTime, String field, String author, String source) {
+	public Paper(String title, Date publishedTime, String type, String author, String source) {
 		this.title = title;
 		this.publishedTime = publishedTime;
-		this.field = field;
+		this.type = type;
 		this.author = author;
 		this.source = source;
 	}
@@ -64,16 +64,16 @@ public class Paper implements Serializable {
 	/**
 	 * @return the field
 	 */
-	public String getField() {
-		return field;
+	public String getType() {
+		return type;
 	}
 
 	/**
 	 * @param field
 	 *            the field to set
 	 */
-	public void setField(String field) {
-		this.field = field;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	/**

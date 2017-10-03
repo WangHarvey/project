@@ -4,11 +4,13 @@ import java.util.Date;
 import java.util.List;
 
 import com.unimelb.project.api.EuropePMC;
+import com.unimelb.project.api.Scopus;
 import com.unimelb.project.factory.DAOFactory;
 import com.unimelb.project.tableModel.ApiReturn;
 import com.unimelb.project.tableModel.LogApiAnalysis;
 import com.unimelb.project.tableModel.Paper;
 import com.unimelb.project.tableModel.PaperRelationshipStaff;
+import com.unimelb.project.tableModel.StaffRelationshipAuthor;
 
 public class DataProcess {
 
@@ -34,6 +36,11 @@ public class DataProcess {
 		if(startPoint < stopPoint){
 			startPoint += 1;
 		}
+		
+		// if start point equals to stop point, donot need process data
+		if(startPoint == stopPoint){
+			startPoint += 1;
+		}
 
 		System.out.println(startPoint);
 		System.out.println(stopPoint);
@@ -42,6 +49,7 @@ public class DataProcess {
 			int staffId;
 			String apiSource;
 			List<Paper> paperList = null;
+			//List<Paper> addList = new ArrayList<Paper>();
 			try {
 				apiReturn = DAOFactory.getIApiReturnDAOInstance().findById(i);
 				if (apiReturn.getReturnInfo() != null) {
@@ -51,11 +59,11 @@ public class DataProcess {
 					apiSource = apiReturn.getSource();
 					if (apiSource.equals("Europe PMC")) {
 						paperList = EuropePMC.analysisApiReturnInfo(apiReturn.getReturnInfo());
-					} else if (true) {
-						
-
+						System.out.println(apiReturn.getStaff() + " published in Europe PMC " + paperList.size());
+					} else if (apiSource.equals("Scopus")) {
+						paperList = Scopus.analysisApiReturnInfo(apiReturn.getReturnInfo());
+						System.out.println(apiReturn.getStaff() + " published in Scopus " + paperList.size());
 					}
-					System.out.println(apiReturn.getStaff() + "published paper" + paperList.size());
 
 					// add paper info and PaperRelationshipStaff info in to
 					// database
@@ -70,7 +78,9 @@ public class DataProcess {
 								// the databese
 								if (paperId == 0) {
 									DAOFactory.getIPaperDAOInstance().doCreate(paper);
+									// if paper not in database we need bulid the relationship
 								}
+								
 							}
 						}
 
@@ -80,12 +90,34 @@ public class DataProcess {
 							if (paper != null) {
 								paperId = DAOFactory.getIPaperDAOInstance().findByTitle(paper.getTitle()).getPaperId();
 								paperRelationshipStaff = new PaperRelationshipStaff(paperId, staffId);
-								DAOFactory.getIPaperRelationshipStaffDAOInstance().doCreate(paperRelationshipStaff);
+								// check if it is already in database
+								boolean isExist = DAOFactory.getIPaperRelationshipStaffDAOInstance().check(paperId, staffId);
+								// if not exist doCreate
+								if(!isExist){
+									DAOFactory.getIPaperRelationshipStaffDAOInstance().doCreate(paperRelationshipStaff);
+								}
+								
 							}
 						}
 						
 						// update StaffRelationshipAuthor table
-						// 检索paper的作者信息，构建员工和作者之间的关系
+						StaffRelationshipAuthor staffRelationshipAuthor;
+						for (Paper paper : paperList) {
+							if (paper != null) {
+								paperId = DAOFactory.getIPaperDAOInstance().findByTitle(paper.getTitle()).getPaperId();
+								String[] authors = paper.getAuthor().split(",");
+								for(String author:authors){
+									staffRelationshipAuthor = new StaffRelationshipAuthor(staffId,paperId, author);
+									// check if it is already in database
+									boolean isExist = DAOFactory.getIStaffRelationshipAuthorDAOInstance().check(paperId, staffId,author);
+									// if not exist doCreate
+									if(!isExist){
+										DAOFactory.getIStaffRelationshipAuthorDAOInstance().doCreate(staffRelationshipAuthor);
+									}
+									
+								}
+							}
+						}
 
 					}
 
