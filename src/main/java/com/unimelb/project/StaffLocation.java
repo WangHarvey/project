@@ -1,4 +1,4 @@
-package com.unimelb.project.task;
+package com.unimelb.project;
 
 import java.util.List;
 

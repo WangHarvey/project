@@ -20,7 +20,7 @@ public class IPaperDAOImpl implements IPaperDAO {
 		// TODO Auto-generated method stub
 		boolean flag = false;
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO paper(title,publishedtime,type,author,source) VALUES (?,?,?,?,?) ";
+		String sql = "INSERT INTO paper(title,publishedtime,type,author,source,citedcount,field) VALUES (?,?,?,?,?,?,?) ";
 		try {
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, paper.getTitle());
@@ -28,6 +28,8 @@ public class IPaperDAOImpl implements IPaperDAO {
 			pstmt.setString(3, paper.getType());
 			pstmt.setString(4, paper.getAuthor());
 			pstmt.setString(5, paper.getSource());
+			pstmt.setInt(6, paper.getCitedcount());
+			pstmt.setString(7, paper.getField());
 
 			// check if the creation is successful
 			if (pstmt.executeUpdate() > 0) {
@@ -51,7 +53,7 @@ public class IPaperDAOImpl implements IPaperDAO {
 		// TODO Auto-generated method stub
 		boolean flag = false;
 		PreparedStatement pstmt = null;
-		String sql = "UPDATE paper SET title=?,publishedtime=?,type=?,author=?,source=? WHERE id=?";
+		String sql = "UPDATE paper SET title=?,publishedtime=?,type=?,author=?,source=?,citedcount=?,field=? WHERE id=?";
 
 		try {
 			pstmt = this.conn.prepareStatement(sql);
@@ -60,7 +62,9 @@ public class IPaperDAOImpl implements IPaperDAO {
 			pstmt.setString(3, paper.getType());
 			pstmt.setString(4, paper.getAuthor());
 			pstmt.setString(5, paper.getSource());
-			pstmt.setInt(5, paper.getPaperId());
+			pstmt.setInt(6, paper.getCitedcount());
+			pstmt.setString(7, paper.getField());
+			pstmt.setInt(8, paper.getPaperId());
 
 			// check if the update is successful
 			if (pstmt.executeUpdate() > 0) {
@@ -121,6 +125,8 @@ public class IPaperDAOImpl implements IPaperDAO {
 				paper.setType(rs.getString(4));
 				paper.setAuthor(rs.getString(5));
 				paper.setSource(rs.getString(6));
+				paper.setCitedcount(rs.getInt(7));
+				paper.setField(rs.getString(8));
 			}
 			rs.close();
 		} catch (Exception e) {
@@ -153,6 +159,8 @@ public class IPaperDAOImpl implements IPaperDAO {
 				paper.setType(rs.getString(4));
 				paper.setAuthor(rs.getString(5));
 				paper.setSource(rs.getString(6));
+				paper.setCitedcount(rs.getInt(7));
+				paper.setField(rs.getString(8));
 			}
 			rs.close();
 		} catch (Exception e) {
@@ -185,7 +193,8 @@ public class IPaperDAOImpl implements IPaperDAO {
 				paper.setType(rs.getString(4));
 				paper.setAuthor(rs.getString(5));
 				paper.setSource(rs.getString(6));
-
+				paper.setCitedcount(rs.getInt(7));
+				paper.setField(rs.getString(8));
 				all.add(paper);
 			}
 			rs.close();
@@ -219,6 +228,8 @@ public class IPaperDAOImpl implements IPaperDAO {
 				paper.setType(rs.getString(4));
 				paper.setAuthor(rs.getString(5));
 				paper.setSource(rs.getString(6));
+				paper.setCitedcount(rs.getInt(7));
+				paper.setField(rs.getString(8));
 			}
 			rs.close();
 		} catch (Exception e) {

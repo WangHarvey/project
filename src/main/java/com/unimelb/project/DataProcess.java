@@ -1,4 +1,4 @@
-package com.unimelb.project.task;
+package com.unimelb.project;
 
 import java.util.Date;
 import java.util.List;
@@ -80,7 +80,6 @@ public class DataProcess {
 									DAOFactory.getIPaperDAOInstance().doCreate(paper);
 									// if paper not in database we need bulid the relationship
 								}
-								
 							}
 						}
 

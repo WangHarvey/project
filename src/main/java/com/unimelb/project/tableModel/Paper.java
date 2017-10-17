@@ -17,14 +17,46 @@ public class Paper implements Serializable {
 	private String type;
 	private String author;
 	private String source;
+	private int citedcount;
+	private String field;
 
 	// Paper Constructor with paper info
-	public Paper(String title, Date publishedTime, String type, String author, String source) {
+	public Paper(String title, Date publishedTime, String type, String author, String source, int citedcount, String field) {
 		this.title = title;
 		this.publishedTime = publishedTime;
 		this.type = type;
 		this.author = author;
 		this.source = source;
+		this.citedcount = citedcount;
+		this.field = field;
+	}
+
+	/**
+	 * @return the citedcount
+	 */
+	public int getCitedcount() {
+		return citedcount;
+	}
+
+	/**
+	 * @param citedcount the citedcount to set
+	 */
+	public void setCitedcount(int citedcount) {
+		this.citedcount = citedcount;
+	}
+
+	/**
+	 * @return the field
+	 */
+	public String getField() {
+		return field;
+	}
+
+	/**
+	 * @param field the field to set
+	 */
+	public void setField(String field) {
+		this.field = field;
 	}
 
 	public Paper() {

@@ -94,8 +94,12 @@ public class EuropePMC {
 
 					String type = itemEle.elementTextTrim("pubType");
 					String author = itemEle.elementTextTrim("authorString");
+					
+					int citedcount = Integer.parseInt(itemEle.elementTextTrim("citedByCount"));
+					String field = "";
+					field = StanfordNLP.getKeywords(title);
 
-					paper = new Paper(title, date, type, author, SOURCE);
+					paper = new Paper(title, date, type, author, SOURCE, citedcount, field);
 					all.add(paper);
 				}
 

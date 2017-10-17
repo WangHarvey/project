@@ -26,7 +26,7 @@ public class Scopus {
 	// &apiKey=e72c6ce59174cdcb29b641a9fc12ae16
 	private static final String APIKEY = "e72c6ce59174cdcb29b641a9fc12ae16";
 	private static final String APIURLID = "http://api.elsevier.com/content/search/author?query=ORCID(XXXX-XXXX-XXXX-XXXX)&httpAccept=application/xml&field=dc:identifier";
-	private static final String APIURLAUTHOR = "http://api.elsevier.com/content/search/scopus?query=AU-ID(XXXXXXXXXX)&httpAccept=application/json&field=title,coverDate,aggregationType,author&count=200";
+	private static final String APIURLAUTHOR = "http://api.elsevier.com/content/search/scopus?query=AU-ID(XXXXXXXXXX)&httpAccept=application/json&field=title,coverDate,aggregationType,author,citedby-count&count=200";
 
 	// get Scopus returned info with orcid and scopus_id
 	public static ApiReturn getApiReturnInfo(int staffId, String orcid) {
@@ -123,12 +123,17 @@ public class Scopus {
 	        	String type = jsonArray.get(i).getAsJsonObject().get("prism:aggregationType").getAsString();
 	        	String author = "";
 	        	JsonArray jsonArrayAuthor = jsonArray.get(i).getAsJsonObject().get("author").getAsJsonArray();
+	        	
 	        	for(int j = 0;j < jsonArrayAuthor.size();j++){
 	        		String str = jsonArrayAuthor.get(j).getAsJsonObject().get("authname").getAsString();
 	        		str += ",";
 	        		author += str;
 	        	}
-	        	paper = new Paper(title, date, type, author, SOURCE);
+	        	int citedcount = jsonArray.get(i).getAsJsonObject().get("citedby-count").getAsInt();
+	        	String field = "";
+	        	field = StanfordNLP.getKeywords(title);
+	        	
+	        	paper = new Paper(title, date, type, author, SOURCE, citedcount, field);
 				all.add(paper);	 
 	        }
 		} catch (Exception e) {
